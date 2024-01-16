@@ -1,7 +1,7 @@
-const models = require('../models');
+const db = require('../models');
 
 const home = async (req, res) => {
-    const data = await models.User.findAll();
+    const data = await db.User.findAll();
     res.render('home', { data });
 };
 
