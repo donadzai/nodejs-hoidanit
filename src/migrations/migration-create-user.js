@@ -47,6 +47,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
+            softDelete: {
+                allowNull: true,
+                type: Sequelize.DATE,
+            },
         });
     },
     async down(queryInterface, Sequelize) {

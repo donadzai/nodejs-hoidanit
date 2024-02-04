@@ -1,6 +1,6 @@
 <div class='mt-4'>
-    <a href='/trash' type='button' class='btn btn-dark'>Thùng rác</a>
-    <h1>Danh sách user</h1>
+    <a href='/stored' type='button' class='btn btn-primary'>Danh sách user</a>
+    <h1>Danh sách user đã xóa</h1>
     <table class='table'>
         <thead>
             <tr>
@@ -12,31 +12,29 @@
             </tr>
         </thead>
         <tbody>
-            {{#each users}}
+            {{#each trashUser}}
                 <tr>
                     <th scope='row'>{{plus @index}}</th>
                     <td>{{this.firstName}}</td>
                     <td>{{this.lastName}}</td>
                     <td>{{this.address}}</td>
                     <td>
-                        <a class='btn btn-primary' href='/stored/edit/{{this.id}}' role='button'>EDIT</a>
-                        <a
+                        <form action='/trash/restore/{{this.id}}?_method=PUT' method='post'>
+                            <button class='btn btn-primary' role='button'>RESTORE</button>
+                        </form>
+                        <button
+                            type='button'
                             class='btn btn btn-danger'
                             data-bs-toggle='modal'
                             data-bs-target='#deleteModel'
                             data-bs-id='{{this.id}}'
-                            href='#'
-                            role='button'
-                        >DELETE</a>
+                        >DELETE</button>
                     </td>
                 </tr>
             {{else}}
-
                 <tr>
-                    <th class='text-center' colspan='7'>Chưa có user nào được tạo.
-                        <a href='/create'>Tạo user ngay !</a></th>
+                    <td class='text-center' colspan='5'>Empty Trash !!!</td>
                 </tr>
-
             {{/each}}
         </tbody>
     </table>
@@ -47,7 +45,7 @@
     <div class='modal-dialog'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class='modal-title fs-5' id='exampleModalLabel'>Bạn có chắc chắn muốn xóa user này không ?</h1>
+                <h1 class='modal-title fs-5' id='exampleModalLabel'>Bạn có chắc chắn muốn xóa vĩnh viễn user này không ?</h1>
             </div>
             <div class='modal-footer'>
                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
@@ -59,4 +57,4 @@
 
 <form id='form-submit' method='post'></form>
 
-<script src='./handleModelDelete.js'></script>
+<script src='./handleModelDeleteFromTrash.js'></script>
