@@ -4,11 +4,14 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 const connectDB = require('./config/connectDB');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
-
+const cors = require('cors');
 const methodOverride = require('method-override');
 
 const app = express();
 const routes = require('./route');
+
+//Cors error
+app.use(cors({ origin: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,4 +39,4 @@ connectDB();
 
 routes(app);
 
-app.listen(3000);
+app.listen(3001);
