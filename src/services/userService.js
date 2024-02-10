@@ -52,4 +52,23 @@ const checkUserEmail = async (email) => {
     }
 };
 
-module.exports = { handleUserLogin };
+const handleGetUser = async (id) => {
+    if (id) {
+        return await db.User.findOne({
+            raw: true,
+            where: { id: id },
+            attributes: {
+                exclude: ['password'],
+            },
+        });
+    }
+
+    return await db.User.findAll({
+        raw: true,
+        attributes: {
+            exclude: ['password'],
+        },
+    });
+};
+
+module.exports = { handleUserLogin, handleGetUser };
