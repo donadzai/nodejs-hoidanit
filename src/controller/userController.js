@@ -26,8 +26,6 @@ const handleLogin = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const id = req.query.id;
-
-        console.log(id);
         if (id) {
             const data = await userService.handleGetUser(id);
             return res.status(200).json({
