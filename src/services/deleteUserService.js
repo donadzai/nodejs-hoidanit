@@ -17,7 +17,7 @@ const softDeleteUser = async ({ id }) => {
     }
 };
 
-const destroyUser = async ({ id }) => {
+const destroyUser = async (id) => {
     try {
         await db.User.destroy({
             where: {

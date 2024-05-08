@@ -71,4 +71,20 @@ const handleGetUser = async (id) => {
     });
 };
 
-module.exports = { handleUserLogin, handleGetUser };
+const handleGetTrashUser = async () => {
+    return await db.User.findAll({
+        raw: true,
+        paranoid: false,
+        attributes: {
+            exclude: ['password'],
+        },
+    });
+};
+
+const handleRestoreUser = async (id) => {
+    await db.User.restore({
+        where: { id: id },
+    });
+};
+
+module.exports = { handleUserLogin, handleGetUser, handleGetTrashUser, handleRestoreUser };

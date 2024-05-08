@@ -28,11 +28,13 @@ const getUser = async (req, res) => {
         const id = req.query.id;
         if (id) {
             const data = await userService.handleGetUser(id);
-            return res.status(200).json({
-                errCode: 0,
-                message: 'Get one user',
-                data,
-            });
+            setTimeout(() => {
+                return res.status(200).json({
+                    errCode: 0,
+                    message: 'Get one user',
+                    data,
+                });
+            }, 6000);
         }
 
         const data = await userService.handleGetUser();
@@ -47,4 +49,21 @@ const getUser = async (req, res) => {
     }
 };
 
-module.exports = { handleLogin, getUser };
+const getTrashUser = async (req, res) => {
+    const trashUsers = await userService.handleGetTrashUser();
+    return res.status(200).json({
+        errCode: 0,
+        message: 'Lay thanh cong user',
+        data: trashUsers,
+    });
+};
+
+const restoreUser = async (req, res) => {
+    await userService.handleRestoreUser(req.params.id);
+    res.status(200).json({
+        errCode: 0,
+        message: 'Khoi phuc thanh cong',
+    });
+};
+
+module.exports = { handleLogin, getUser, getTrashUser, restoreUser };
