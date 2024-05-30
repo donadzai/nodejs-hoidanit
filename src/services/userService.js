@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 
@@ -87,4 +88,26 @@ const handleRestoreUser = async (id) => {
     });
 };
 
-module.exports = { handleUserLogin, handleGetUser, handleGetTrashUser, handleRestoreUser };
+const handleGetAllCodes = (type) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (type) {
+                const respond = await db.Allcode.findAll({ where: { type: type } });
+                resolve({
+                    errCode: 0,
+                    message: 'Sucessfully',
+                    data: respond,
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing paramers',
+                });
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+module.exports = { handleUserLogin, handleGetUser, handleGetTrashUser, handleRestoreUser, handleGetAllCodes };

@@ -66,4 +66,9 @@ const restoreUser = async (req, res) => {
     });
 };
 
-module.exports = { handleLogin, getUser, getTrashUser, restoreUser };
+const getAllCodes = async (req, res) => {
+    const data = await userService.handleGetAllCodes(req.query.type);
+    res.status(200).json(data);
+};
+
+module.exports = { handleLogin, getUser, getTrashUser, restoreUser, getAllCodes };
