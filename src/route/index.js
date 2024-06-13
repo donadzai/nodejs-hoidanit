@@ -7,6 +7,7 @@ const userRouter = require('./user');
 const createNewUserRouter = require('./createNewUser');
 const editUser = require('./editUser');
 const deleteUser = require('./deleteUser');
+const allcodes = require('./allcodes');
 
 function routes(app) {
     app.use('/create', createAccRouter);
@@ -17,6 +18,7 @@ function routes(app) {
     app.use('/api/create-new-user', createNewUserRouter);
     app.use('/api/edit-user', editUser);
     app.use('/api/delete-user', deleteUser);
+    app.use('/api/allcodes', allcodes);
     app.use('/', homeRouter);
 }
 

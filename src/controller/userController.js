@@ -7,7 +7,7 @@ const handleLogin = async (req, res) => {
         if (!email || !password) {
             return res.status(200).json({
                 errCode: 1,
-                message: 'Username or Password not present',
+                message: 'Username or Password are not empty!',
                 user: {},
             });
         } else {
