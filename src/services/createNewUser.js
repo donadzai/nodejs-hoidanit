@@ -19,7 +19,8 @@ const createNewUserService = async (data) => {
             lastName: data.lastName,
             address: data.address,
             phonenumber: data.phoneNumber,
-            gender: data.gender === '1' ? true : false,
+            gender: data.gender,
+            positionId: data.positionId,
             roleId: data.roleId,
         });
 
