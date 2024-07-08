@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 
@@ -55,13 +54,23 @@ const checkUserEmail = async (email) => {
 
 const handleGetUser = async (id) => {
     if (id) {
-        return await db.User.findOne({
+        const user = await db.User.findOne({
             raw: true,
             where: { id: id },
             attributes: {
                 exclude: ['password'],
             },
         });
+
+        if (user.image) {
+            const image = await new Buffer.from(user.image, 'base64').toString('binary');
+
+            const userAfterChange = { ...user, image };
+
+            return userAfterChange;
+        }
+
+        return user;
     }
 
     return await db.User.findAll({

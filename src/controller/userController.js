@@ -28,13 +28,11 @@ const getUser = async (req, res) => {
         const id = req.query.id;
         if (id) {
             const data = await userService.handleGetUser(id);
-            setTimeout(() => {
-                return res.status(200).json({
-                    errCode: 0,
-                    message: 'Get one user',
-                    data,
-                });
-            }, 6000);
+            return res.status(200).json({
+                errCode: 0,
+                message: 'Get one user',
+                data,
+            });
         }
 
         const data = await userService.handleGetUser();

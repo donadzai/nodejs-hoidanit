@@ -20,8 +20,9 @@ const createNewUserService = async (data) => {
             address: data.address,
             phonenumber: data.phoneNumber,
             gender: data.gender,
-            positionId: data.positionId,
             roleId: data.roleId,
+            positionId: data.positionId,
+            image: data.image,
         });
 
         return {
